@@ -15,6 +15,7 @@
     "seed": "sequelize db:seed:all"
   },
   "dependencies": {
+    "@babel/runtime": "7.7.0",
     "@hapi/joi": "^17.1.1",
     "@sendgrid/mail": "^7.1.1",
     "bcrypt": "^3.0.6",
@@ -31,7 +32,6 @@
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
     "@babel/node": "^7.7.0",
