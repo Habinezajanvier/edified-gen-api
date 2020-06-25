@@ -1,5 +1,5 @@
 import sgMail from "@sendgrid/mail";
-import Models from "../models";
+import Models from "../../models";
 import emailMsg from "../helpers/email";
 
 const { Essay } = Models;
