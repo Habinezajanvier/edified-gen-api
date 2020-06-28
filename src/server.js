@@ -4,14 +4,14 @@ import cors from "cors";
 import router from "./router";
 
 const app = express();
-const corsOptions = {
-  origin: /http:\/\/localhost:3000\/*/
-};
+// const corsOptions = {
+//   origin: /http:\/\/localhost:3000\/*/
+// };
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use("/", router);
 app.use((req, res, next) => {
