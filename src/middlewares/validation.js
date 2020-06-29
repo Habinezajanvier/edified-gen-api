@@ -4,10 +4,10 @@ const registerValidation = (req, res, next) => {
   const schema = Joi.object({
     fullName: Joi.string().required(),
     guardianName: Joi.string().required(),
-    parentsId: Joi.string().required(),
-    email: Joi.string().required().email(),
+    parentsId: Joi.string().required().min(16).max(16),
+    email: Joi.string().email(),
     birthDate: Joi.date().required(),
-    phone: Joi.string().min(10).max(13).required(),
+    phone: Joi.string().min(10).max(13),
     guardianPhone: Joi.string().min(10).max(13).required(),
     district: Joi.string().required(),
     school: Joi.string().required(),
