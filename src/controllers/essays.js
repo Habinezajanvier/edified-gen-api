@@ -20,7 +20,7 @@ export default {
       topic,
       essay
     } = req.body;
-    const emailExist = await Essay.findOne({ where: { email } });
+    const emailExist = await Essay.findOne({ where: { parentsId } });
     if (emailExist) {
       return res.status(200).send({ message: "Your essay was recorded before" });
     }
