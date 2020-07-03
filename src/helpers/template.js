@@ -78,7 +78,7 @@ const template = ({
           </header>
           <div class="content">
             <p>
-              Hello Admin<br />
+              Hello Edified Generation Rwanda<br />
               Hoping you are doing well<br />
               This is the submission for Covid-19 essay competition by  <span>${fullName}</span> 
             </p>
