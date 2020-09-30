@@ -1,7 +1,7 @@
 import { Router } from "express";
-import asyncHandler from "./middlewares/asyncHandler";
-import essayController from "./controllers/essays";
-import essayValidation from "./middlewares/validation";
+import asyncHandler from "../middlewares/asyncHandler";
+import essayController from "../controllers/essays";
+import essayValidation from "../middlewares/validation";
 
 const router = new Router();
 
