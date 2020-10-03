@@ -1,10 +1,8 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
-import router from "./routes/essays";
-import loginRoute from "./routes/login";
+import router from "./routes";
 import admin from "./helpers/createAdmin";
-import imageRouter from "./routes/image";
 
 const app = express();
 // const corsOptions = {
@@ -17,9 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 admin();
 
-app.use("/", router);
-app.use("/api", loginRoute);
-app.use("/api/images", imageRouter);
+app.use("/api", router);
 app.use((req, res, next) => {
   res.status(404).send({ err: "Page not found" });
 });

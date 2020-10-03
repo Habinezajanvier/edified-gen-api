@@ -1,13 +1,13 @@
 import Joi from "@hapi/joi";
 
-const registerValidation = (req, res, next) => {
+export const essayValidation = (req, res, next) => {
   const schema = Joi.object({
     fullName: Joi.string().required(),
     guardianName: Joi.string().required(),
     parentsId: Joi.string().required().min(16).max(16),
-    email: Joi.string().allow(''),
+    email: Joi.string().allow(""),
     birthDate: Joi.date().required(),
-    phone: Joi.string().allow(''),
+    phone: Joi.string().allow(""),
     guardianPhone: Joi.string().min(10).max(13).required(),
     district: Joi.string().required(),
     school: Joi.string().required(),
@@ -21,4 +21,14 @@ const registerValidation = (req, res, next) => {
   next();
 };
 
-export default registerValidation;
+export const messageValidation = (req, res, next) => {
+  const schema = Joi.object({
+    fullName: Joi.string().required(),
+    email: Joi.string().required().email(),
+    phoneNumber: Joi.string().required(),
+    message: Joi.string.required().min(8)
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({ err: error.details[0].message });
+  next();
+};
