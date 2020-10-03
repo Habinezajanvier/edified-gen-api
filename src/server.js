@@ -4,6 +4,7 @@ import cors from "cors";
 import router from "./routes/essays";
 import loginRoute from "./routes/login";
 import admin from "./helpers/createAdmin";
+import imageRouter from "./routes/image";
 
 const app = express();
 // const corsOptions = {
@@ -18,6 +19,7 @@ admin();
 
 app.use("/", router);
 app.use("/api", loginRoute);
+app.use("/api/images", imageRouter);
 app.use((req, res, next) => {
   res.status(404).send({ err: "Page not found" });
 });

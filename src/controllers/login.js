@@ -20,7 +20,8 @@ export default async (req, res) => {
     id: account.id,
     email: account.email,
     firstName: account.firstName,
-    lastName: account.lastName
+    lastName: account.lastName,
+    role: account.role
   });
 
   res.status(200).send({ message: "Successfully loged in", token });
