@@ -6,13 +6,13 @@ export default async (req, res) => {
   const { email, password } = req.body;
   const account = await User.findOne({ where: { email } });
   if (!account) {
-    return res.status(404).send({
+    return res.status(401).send({
       message: "Email or password is incorrect"
     });
   }
   const validPass = await bcrypt.compare(password, account.password);
   if (!validPass) {
-    return res.status(404).send({
+    return res.status(401).send({
       message: "Email or password is incorrect"
     });
   }
