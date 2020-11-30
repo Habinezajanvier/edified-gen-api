@@ -1,6 +1,11 @@
+import aws from "aws-sdk";
 import Models from "../../models";
 
-const { Project } = models;
+const { Project } = Models;
+
+aws.config.region = "us-east-2";
+
+const { S3_BUCKET } = process.env;
 
 const projectController = {
   getSignedUrl: (req, res) => {
@@ -17,27 +22,25 @@ const projectController = {
 
     s3.getSignedUrl("putObject", s3Params, (err, data) => {
       if (err) {
-        console.log(err);
-        return res.end();
+        return res.status(400).send({ err: "Can not get signed request" });
       }
       const returnData = {
         signedRequest: data,
         url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
       };
-      res.write(JSON.stringify(returnData));
-      res.end();
+      res.status(201).send({ msg: "Signed url request returned", returnData });
     });
   },
 
   postProject: async (req, res) => {
-    const { name, caption, photoUrl } = req.body;
-    const project = await Project.create({ name, caption, photoUrl });
+    const { projectUrl, description, title } = req.body;
+    const project = await Project.create({ projectUrl, description, title });
     res.status(201).send({ msg: "Project posted successfully", project });
   },
 
   getProjects: async (req, res) => {
-    const project = await Project.findAll();
-    res.status(200).send(project);
+    const projects = await Project.findAll();
+    res.status(200).send({ projects });
   },
 
   deleteProject: async (req, res) => {
@@ -48,19 +51,23 @@ const projectController = {
         .status(200)
         .send({ msg: "Project successfully deleted", deletedProject });
     }
-    return res.status(404).send("Project with the specified ID doesn't exist");
+    return res
+      .status(404)
+      .send({ msg: "Project with the specified ID doesn't exist" });
   },
+
   updateProject: async (req, res) => {
     const { id } = req.params;
-    const { caption } = req.body;
-    const [update] = await Project.update({ caption }, { where: { id } });
+    const [update] = await Project.update({ ...req.body }, { where: { id } });
     if (update) {
       const updatedProject = await Project.findOne({ where: { id } });
       return res
         .status(200)
-        .send({ msg: "Caption successfully updated", updatedProject });
+        .send({ msg: "Project successfully updated", updatedProject });
     }
-    return res.status(404).send("Project with the specified ID doesn't exist");
+    return res
+      .status(404)
+      .send({ msg: "Project with the specified ID doesn't exist" });
   }
 };
 
