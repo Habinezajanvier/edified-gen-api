@@ -3,9 +3,9 @@ import { User } from "../../models";
 
 export default async () => {
   try {
-    const { PASSwORD, ADMIN_EMAIL } = process.env;
+    const { PASSWORD, ADMIN_EMAIL } = process.env;
     const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(PASSwORD, salt);
+    const password = await bcrypt.hash(PASSWORD, salt);
     const [user, created] = await User.findOrCreate({
       where: { email: ADMIN_EMAIL },
       defaults: {
