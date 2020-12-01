@@ -20,7 +20,9 @@ export default {
         .status(200)
         .send({ msg: "Event successfully deleted", deletedEvent });
     }
-    return res.status(404).send("Event with the specified ID doesn't exist");
+    return res
+      .status(404)
+      .send({ msg: "Event with the specified ID doesn't exist" });
   },
   updateEvent: async (req, res) => {
     const { id } = req.params;
@@ -32,6 +34,8 @@ export default {
         .status(200)
         .send({ msg: "Caption successfully updated", updatedEvent });
     }
-    return res.status(404).send("Event with the specified ID doesn't exist");
+    return res
+      .status(404)
+      .send({ msg: "Event with the specified ID doesn't exist" });
   }
 };
