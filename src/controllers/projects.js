@@ -28,7 +28,7 @@ const projectController = {
         signedRequest: data,
         url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
       };
-      res.status(201).send({ msg: "Signed url request returned", returnData });
+      res.status(201).send({ msg: "Signed url request returned", data: returnData });
     });
   },
 
