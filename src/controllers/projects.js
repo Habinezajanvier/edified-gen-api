@@ -1,7 +1,5 @@
 import aws from "aws-sdk";
-import Models from "../../models";
-
-const { Project } = Models;
+import { Project } from "../../models";
 
 aws.config.region = "us-east-2";
 
