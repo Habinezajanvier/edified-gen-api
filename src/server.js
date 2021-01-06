@@ -2,7 +2,6 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import router from "./routes";
-import admin from "./helpers/createAdmin";
 
 const app = express();
 // const corsOptions = {
@@ -13,7 +12,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-admin();
 
 app.use("/api", router);
 app.use((req, res, next) => {
