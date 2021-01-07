@@ -27,6 +27,6 @@ export default {
     const message = await Message.findByPk(id);
     if (!message) return res.status(404).send({ message: "No message found" });
     await Message.destroy({ where: { id } });
-    return res.status(200).send({ message: "Message successfuylly deleted" });
+    return res.status(200).send({ message: "Message successfully deleted" });
   }
 };
