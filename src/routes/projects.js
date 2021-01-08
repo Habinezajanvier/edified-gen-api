@@ -2,12 +2,13 @@ import { Router } from "express";
 import asyncHandler from "../middlewares/asyncHandler";
 import projectController from "../controllers/projects";
 import { auth, adminAuth } from "../middlewares/authorization";
+import { getSignedUrl } from "../controllers/files";
 
 const projectRouter = new Router();
 
 projectRouter
   .post("/", [auth, adminAuth], asyncHandler(projectController.postProject))
-  .get("/signedUrl", [auth, adminAuth], asyncHandler(projectController.getSignedUrl))
+  .get("/signedUrl", [auth, adminAuth], asyncHandler(getSignedUrl))
   .get("/", [auth, adminAuth], asyncHandler(projectController.getProjects))
   .delete("/:id", [auth, adminAuth], asyncHandler(projectController.deleteProject))
   .put("/:id", [auth, adminAuth], asyncHandler(projectController.updateProject));
