@@ -32,3 +32,25 @@ export const messageValidation = (req, res, next) => {
   if (error) return res.status(400).json({ err: error.details[0].message });
   next();
 };
+
+export const eventValidation = (req, res, next) => {
+  const schema = Joi.object({
+    title: Joi.string().min(8).max(50).required(),
+    caption: Joi.string().min(8).required(),
+    photoUrl: Joi.string().required()
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({err: error.details[0].message})
+  next();
+};
+
+export const eventUpdateValidation = (req, res, next) => {
+  const schema = Joi.object({
+    title: Joi.string().min(8).max(50),
+    caption: Joi.string().min(8),
+    photoUrl: Joi.string()
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({err: error.details[0].message})
+  next();
+}
