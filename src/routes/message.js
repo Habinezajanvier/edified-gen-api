@@ -8,7 +8,8 @@ const messageRouter = new Router();
 
 messageRouter
   .post("/", messageValidation, asyncHandler(messageController.sendMessage))
-  .get("/", [auth, adminAuth], asyncHandler(messageController.getMessage))
+  .get("/", [auth, adminAuth], asyncHandler(messageController.getMessages))
+  .get("/:id", [auth, adminAuth], asyncHandler(messageController.getMessage))
   .delete("/:id", [auth, adminAuth], asyncHandler(messageController.deleteMessage));
 
 export default messageRouter;
