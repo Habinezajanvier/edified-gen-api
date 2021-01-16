@@ -1,10 +1,14 @@
 import { Project } from "../../models";
 
-
 const projectController = {
   postProject: async (req, res) => {
-    const { projectUrl, description, title } = req.body;
-    const project = await Project.create({ projectUrl, description, title });
+    const { projectUrl, projectThumbnail, description, title } = req.body;
+    const project = await Project.create({
+      projectUrl,
+      projectThumbnail,
+      description,
+      title
+    });
     res.status(201).send({ msg: "Project posted successfully", project });
   },
 
