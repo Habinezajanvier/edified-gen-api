@@ -14,12 +14,19 @@ export default {
       .send({ message: "Message successfully sent", newMessage });
   },
 
-  getMessage: async (req, res) => {
+  getMessages: async (req, res) => {
     const messages = await Message.findAll();
     if (messages.length === 0) {
       return res.status(404).send({ message: "No message found" });
     }
     return res.status(200).send({ messages });
+  },
+
+  getMessage: async (req, res) => {
+    const { id } = req.params;
+    const message = await Message.findByPk(id);
+    if (!message) return res.status(404).send({ message: "No message found" });
+    return res.status(200).send({ message });
   },
 
   deleteMessage: async (req, res) => {
