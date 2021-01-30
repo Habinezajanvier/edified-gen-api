@@ -53,4 +53,33 @@ export const eventUpdateValidation = (req, res, next) => {
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).json({err: error.details[0].message})
   next();
+};
+
+export const partnerValidation = (req, res, next) => {
+  const schema = Joi.object({
+    name: Joi.string().required().messages({
+      'string.base': 'Name is required',
+      'string.empty': 'Name is cannot be empty',
+      'any.required': 'Name is required',
+    }),
+    logo: Joi.string().required().messages({
+      'string.base': 'Logo is required',
+      'string.empty': 'Logo cannot be empty',
+      'any.required': 'Logo is required'
+    })
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({err: error.details[0].message})
+  next()
+}
+export const updatePartnerValidation = (req, res, next) => {
+  const schema = Joi.object({
+    name: Joi.string().min(3).message({
+      'string.min': `Name shouldn't be less than {#limit} characters`,
+    }),
+    logo: Joi.string()
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({err: error.details[0].message})
+  next()
 }
