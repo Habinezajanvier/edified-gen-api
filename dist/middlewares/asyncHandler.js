@@ -10,8 +10,10 @@ var asyncHandler = function asyncHandler(cb) {
     try {
       await cb(req, res, next);
     } catch (error) {
+      console.log(error);
       return res.status(500).send({
-        err: "Something went wrong on the server"
+        err: "Something went wrong on the server",
+        message: error.message
       });
     }
   };
