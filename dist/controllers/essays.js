@@ -31,7 +31,7 @@ var _default = {
         essay = _req$body.essay;
     var emailExist = await Essay.findOne({
       where: {
-        email: email
+        parentsId: parentsId
       }
     });
 
