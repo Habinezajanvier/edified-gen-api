@@ -9,7 +9,7 @@ const projectRouter = new Router();
 projectRouter
   .post("/", [auth, adminAuth], asyncHandler(projectController.postProject))
   .get("/signedUrl", [auth, adminAuth], asyncHandler(getSignedUrl))
-  .get("/", [auth, adminAuth], asyncHandler(projectController.getProjects))
+  .get("/", asyncHandler(projectController.getProjects))
   .delete("/:id", [auth, adminAuth], asyncHandler(projectController.deleteProject))
   .put("/:id", [auth, adminAuth], asyncHandler(projectController.updateProject));
 
