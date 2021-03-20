@@ -2,10 +2,11 @@ import { Partner }  from '../../models'
 
 export default {
     addPartner: async (req, res) => {
-        const { name, logo } = req.body;
+        const { name, logo, partnerWeb } = req.body;
         const addedPartner = await Partner.create({
             name,
-            logo
+            logo,
+            partnerWeb
         });
 
         return res.status(201).json({ msg: 'Partner added successfully', addedPartner })
