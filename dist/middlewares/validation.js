@@ -94,14 +94,19 @@ exports.eventUpdateValidation = eventUpdateValidation;
 var partnerValidation = function partnerValidation(req, res, next) {
   var schema = _joi["default"].object({
     name: _joi["default"].string().required().messages({
-      'string.base': 'Name is required',
-      'string.empty': 'Name is cannot be empty',
-      'any.required': 'Name is required'
+      "string.base": "Name is required",
+      "string.empty": "Name is cannot be empty",
+      "any.required": "Name is required"
     }),
-    logo: _joi["default"].string().required().messages({
-      'string.base': 'Logo is required',
-      'string.empty': 'Logo cannot be empty',
-      'any.required': 'Logo is required'
+    logo: _joi["default"].string().uri().required().messages({
+      "string.base": "Logo is required",
+      "string.empty": "Logo cannot be empty",
+      "any.required": "Logo is required"
+    }),
+    partnerWeb: _joi["default"].string().uri().required().messages({
+      "string.base": "Web is required",
+      "string.empty": "Web cannot be empty",
+      "any.required": "Web is required"
     })
   });
 
@@ -119,9 +124,10 @@ exports.partnerValidation = partnerValidation;
 var updatePartnerValidation = function updatePartnerValidation(req, res, next) {
   var schema = _joi["default"].object({
     name: _joi["default"].string().min(3).message({
-      'string.min': "Name shouldn't be less than {#limit} characters"
+      "string.min": "Name shouldn't be less than {#limit} characters"
     }),
-    logo: _joi["default"].string()
+    logo: _joi["default"].string(),
+    projectWeb: _joi["default"].string()
   });
 
   var _schema$validate6 = schema.validate(req.body),

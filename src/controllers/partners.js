@@ -12,10 +12,10 @@ export default {
         return res.status(201).json({ msg: 'Partner added successfully', addedPartner })
     },
     getPartners: async (req, res) => {
-        const savedPartners = await Partner.findAll();
-        if (savedPartners.length === 0) return res.status(400).json({ msg: 'There are no Partners yet'})
+        const partners = await Partner.findAll();
+        if (partners.length === 0) return res.status(400).json({ msg: 'There are no Partners yet'})
 
-        return res.status(200).json({ savedPartners })
+        return res.status(200).json({ partners })
     },
     getPartner: async (req, res) => {
         const { id } = req.params;

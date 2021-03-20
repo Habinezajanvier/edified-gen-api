@@ -11,10 +11,12 @@ var _default = {
   addPartner: async function addPartner(req, res) {
     var _req$body = req.body,
         name = _req$body.name,
-        logo = _req$body.logo;
+        logo = _req$body.logo,
+        partnerWeb = _req$body.partnerWeb;
     var addedPartner = await _models.Partner.create({
       name: name,
-      logo: logo
+      logo: logo,
+      partnerWeb: partnerWeb
     });
     return res.status(201).json({
       msg: 'Partner added successfully',
@@ -22,12 +24,12 @@ var _default = {
     });
   },
   getPartners: async function getPartners(req, res) {
-    var savedPartners = await _models.Partner.findAll();
-    if (savedPartners.length === 0) return res.status(400).json({
+    var partners = await _models.Partner.findAll();
+    if (partners.length === 0) return res.status(400).json({
       msg: 'There are no Partners yet'
     });
     return res.status(200).json({
-      savedPartners: savedPartners
+      partners: partners
     });
   },
   getPartner: async function getPartner(req, res) {
