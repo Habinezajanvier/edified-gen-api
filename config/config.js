@@ -10,7 +10,8 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "postgres",
-    logging: false
+    logging: false,
+    ssl: true
   },
   test: {
     username: process.env.DB_USERNAME,
@@ -19,14 +20,17 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: "postgres",
-    logging: false
+    logging: false,
+    ssl: true
   },
   production: {
     use_env_variable: "DATABASE_URL",
-    logging: false
+    logging: false,
+    sslmode:require
   },
   staging: {
     use_env_variable: "DATABASE_URL_STAGING",
-    logging: false
+    logging: false,
+    ssl: true
   }
 };

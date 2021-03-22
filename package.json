@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "engines": {
-    "node": "12.13.1"
+    "node": ">=12.13.1"
   },
   "scripts": {
     "dev:start": "nodemon --exec babel-node src/server.js",
-    "start": "node ./dist/server.js",
+    "start": "npm run migrate && npm run seed && node ./dist/server.js",
     "lint": "./node_modules/.bin/eslint src/",
     "build": "rm -rf dist && babel src --out-dir ./dist --source-maps",
     "migration:undo": "sequelize db:migrate:undo:all",
@@ -15,36 +15,36 @@
     "seed": "sequelize db:seed:all"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.0",
+    "@babel/runtime": "7.13.10",
     "@hapi/joi": "^17.1.1",
-    "@sendgrid/mail": "^7.1.1",
-    "aws-sdk": "^2.799.0",
-    "bcrypt": "^3.0.6",
+    "@sendgrid/mail": "^7.4.2",
+    "aws-sdk": "^2.869.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
-    "datauri": "^2.0.0",
+    "datauri": "^3.0.0",
     "dotenv": "^8.2.0",
-    "express": "~4.16.1",
+    "express": "~4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "~1.9.1",
+    "morgan": "~1.10.0",
     "multer": "^1.4.2",
-    "pg": "^7.12.1",
+    "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.2",
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/node": "^7.7.0",
-    "@babel/register": "^7.7.0",
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.12",
+    "@babel/register": "^7.13.8",
     "babel-eslint": "^10.0.3",
-    "babel-preset-airbnb": "^4.1.0",
-    "debug": "~2.6.9",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.1",
-    "nodemon": "^1.19.4"
+    "babel-preset-airbnb": "^5.0.0",
+    "debug": "~4.3.1",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nodemon": "^2.0.7"
   }
 }
