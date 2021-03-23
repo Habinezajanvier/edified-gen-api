@@ -15,10 +15,12 @@ var _projects = _interopRequireDefault(require("../controllers/projects"));
 
 var _authorization = require("../middlewares/authorization");
 
+var _validation = require("../middlewares/validation");
+
 var _files = require("../controllers/files");
 
 var projectRouter = new _express.Router();
-projectRouter.post("/", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_projects["default"].postProject)).get("/signedUrl", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_files.getSignedUrl)).get("/", (0, _asyncHandler["default"])(_projects["default"].getProjects))["delete"]("/:id", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_projects["default"].deleteProject)).put("/:id", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_projects["default"].updateProject));
+projectRouter.post("/", [_authorization.auth, _authorization.adminAuth], _validation.projectValidation, (0, _asyncHandler["default"])(_projects["default"].postProject)).get("/signedUrl", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_files.getSignedUrl)).get("/", (0, _asyncHandler["default"])(_projects["default"].getProjects))["delete"]("/:id", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_projects["default"].deleteProject)).put("/:id", [_authorization.auth, _authorization.adminAuth], (0, _asyncHandler["default"])(_projects["default"].updateProject));
 var _default = projectRouter;
 exports["default"] = _default;
 //# sourceMappingURL=projects.js.map
