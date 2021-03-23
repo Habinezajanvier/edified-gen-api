@@ -44,6 +44,18 @@ export const eventValidation = (req, res, next) => {
   next();
 };
 
+export const projectValidation = (req, res, next) => {
+  const schema = Joi.object({
+    title: Joi.string().min(8).required(),
+    description: Joi.string().min(8).required(),
+    projectUrl: Joi.string().uri().required(),
+    projectThumbnail: Joi.string().uri().required()
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({ err: error.details[0].message });
+  next();
+};
+
 export const eventUpdateValidation = (req, res, next) => {
   const schema = Joi.object({
     title: Joi.string().min(8).max(50),
@@ -83,7 +95,7 @@ export const updatePartnerValidation = (req, res, next) => {
       "string.min": `Name shouldn't be less than {#limit} characters`
     }),
     logo: Joi.string(),
-    projectWeb: Joi.string()
+    partnerWeb: Joi.string()
   });
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).json({ err: error.details[0].message });

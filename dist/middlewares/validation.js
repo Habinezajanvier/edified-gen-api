@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updatePartnerValidation = exports.partnerValidation = exports.eventUpdateValidation = exports.eventValidation = exports.messageValidation = exports.essayValidation = void 0;
+exports.updatePartnerValidation = exports.partnerValidation = exports.eventUpdateValidation = exports.projectValidation = exports.eventValidation = exports.messageValidation = exports.essayValidation = void 0;
 
 var _joi = _interopRequireDefault(require("@hapi/joi"));
 
@@ -73,6 +73,25 @@ var eventValidation = function eventValidation(req, res, next) {
 
 exports.eventValidation = eventValidation;
 
+var projectValidation = function projectValidation(req, res, next) {
+  var schema = _joi["default"].object({
+    title: _joi["default"].string().min(8).required(),
+    description: _joi["default"].string().min(8).required(),
+    projectUrl: _joi["default"].string().uri().required(),
+    projectThumbnail: _joi["default"].string().uri().required()
+  });
+
+  var _schema$validate4 = schema.validate(req.body),
+      error = _schema$validate4.error;
+
+  if (error) return res.status(400).json({
+    err: error.details[0].message
+  });
+  next();
+};
+
+exports.projectValidation = projectValidation;
+
 var eventUpdateValidation = function eventUpdateValidation(req, res, next) {
   var schema = _joi["default"].object({
     title: _joi["default"].string().min(8).max(50),
@@ -80,8 +99,8 @@ var eventUpdateValidation = function eventUpdateValidation(req, res, next) {
     photoUrl: _joi["default"].string()
   });
 
-  var _schema$validate4 = schema.validate(req.body),
-      error = _schema$validate4.error;
+  var _schema$validate5 = schema.validate(req.body),
+      error = _schema$validate5.error;
 
   if (error) return res.status(400).json({
     err: error.details[0].message
@@ -110,8 +129,8 @@ var partnerValidation = function partnerValidation(req, res, next) {
     })
   });
 
-  var _schema$validate5 = schema.validate(req.body),
-      error = _schema$validate5.error;
+  var _schema$validate6 = schema.validate(req.body),
+      error = _schema$validate6.error;
 
   if (error) return res.status(400).json({
     err: error.details[0].message
@@ -127,11 +146,11 @@ var updatePartnerValidation = function updatePartnerValidation(req, res, next) {
       "string.min": "Name shouldn't be less than {#limit} characters"
     }),
     logo: _joi["default"].string(),
-    projectWeb: _joi["default"].string()
+    partnerWeb: _joi["default"].string()
   });
 
-  var _schema$validate6 = schema.validate(req.body),
-      error = _schema$validate6.error;
+  var _schema$validate7 = schema.validate(req.body),
+      error = _schema$validate7.error;
 
   if (error) return res.status(400).json({
     err: error.details[0].message
